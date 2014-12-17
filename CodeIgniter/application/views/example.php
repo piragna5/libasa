@@ -47,7 +47,11 @@ a:hover
 		<a href='<?php echo site_url('administrador/equipos')?>'>Equipos</a> | 
 		<a href='<?php echo site_url('administrador/jugadores')?>'>Jugadores</a> |		 
 		<a href='<?php echo site_url('administrador/rol')?>'>Rol</a> | 
-		<!--<a href='<?php echo site_url('examples/film_management_twitter_bootstrap')?>'>Twitter Bootstrap Theme [BETA]</a> | 
+		<a href='<?php echo site_url('administrador/auditorios')?>'>Auditorios</a> | 
+		<a href='<?php echo site_url('administrador/nivelusuario')?>'>Nivel de usuario</a> | 
+		<a href='<?php echo site_url('administrador/users')?>'>Usuarios</a> | 
+        <a href='<?php echo site_url('home/logout')?>'>Salir</a> |
+				<!--<a href='<?php echo site_url('examples/film_management_twitter_bootstrap')?>'>Twitter Bootstrap Theme [BETA]</a> | 
 		<a href='<?php echo site_url('examples/multigrids')?>'>Multigrid [BETA]</a> -->
 		
 	</div> 

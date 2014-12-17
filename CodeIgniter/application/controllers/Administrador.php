@@ -1,6 +1,8 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+session_start();
 
 class Administrador extends CI_Controller {
+
 
 	function __construct()
 	{
@@ -16,12 +18,15 @@ class Administrador extends CI_Controller {
 
 	
 	function _example_output($output = null)
-
     {
-        $this->load->view('example.php',$output);    
+        $this->load->view('example.php',$output);  
+
     }
+      
  
     function index(){
+        if($this->session->userdata('logged_in'))
+   {
         $crud = new grocery_CRUD();
         $crud->set_table('torneos');
         $crud->set_subject('Torneo');
@@ -34,8 +39,16 @@ class Administrador extends CI_Controller {
         $output = $crud->render();
         $this->_example_output($output);
     }
+    else
+   {
+     //If no session, redirect to login page
+     redirect('login', 'refresh');
+   }
+}
 
     function agregarEquipos($primary_key){
+         if($this->session->userdata('logged_in'))
+   {
         $crud = new grocery_CRUD();
         $crud->set_table('equipos');
         $crud->where('Torneos_idTorneo', $primary_key);
@@ -46,8 +59,16 @@ class Administrador extends CI_Controller {
         $output = $crud->render();
         $this->_example_output($output);
     }
-
+     else
+   {
+     //If no session, redirect to login page
+     redirect('login', 'refresh');
+   }
+}
+ 
     function entrenadores(){
+         if($this->session->userdata('logged_in'))
+   {
         $crud = new grocery_CRUD();
         //$crud->set_theme('datatables');
         $crud->set_table('persona');
@@ -61,10 +82,17 @@ class Administrador extends CI_Controller {
         $output = $crud->render();
         $this->_example_output($output);
     }
+    else
+   {
+     //If no session, redirect to login page
+     redirect('login', 'refresh');
+   }
+}
+   
 
     function jugadores(){
-
-
+       if($this->session->userdata('logged_in'))
+   {
         $crud = new grocery_CRUD();
         $crud->set_table('jugador'); //Change to your table name
         $crud->set_subject('Jugador');
@@ -92,10 +120,17 @@ class Administrador extends CI_Controller {
         $output = $crud->render();
         $this->_example_output($output);*/
         }
+        else
+   {
+     //If no session, redirect to login page
+     redirect('login', 'refresh');
+   }
+    }
 
 
-        function agregarPartidos($primary_key)
-        {
+        function agregarPartidos($primary_key){
+        if($this->session->userdata('logged_in'))
+   {
             
             $crud = new grocery_CRUD();
             $crud->set_table('partidos'); //Change to your table name
@@ -119,9 +154,16 @@ class Administrador extends CI_Controller {
             $output = $crud->render();
             $this->_example_output($output);
         }
+         else
+   {
+     //If no session, redirect to login page
+     redirect('login', 'refresh');
+   }
+    }
 
         function rol(){
-
+          if($this->session->userdata('logged_in'))
+   {
             $crud = new grocery_CRUD();
             $crud->set_table('jornada'); //Change to your table name
             //$crud->set_theme('datatables');
@@ -165,8 +207,16 @@ class Administrador extends CI_Controller {
             $output = $crud->render();
             $this->_example_output($output);*/
         }
+        else
+   {
+     //If no session, redirect to login page
+     redirect('login', 'refresh');
+   }
+    }
 
     function equipos(){
+        if($this->session->userdata('logged_in'))
+   {
         $crud = new grocery_CRUD();
         $crud->set_table('equipos');
         $crud->columns('nombre', 'Torneos_idTorneo');
@@ -178,8 +228,16 @@ class Administrador extends CI_Controller {
         $output = $crud->render();
         $this->_example_output($output);
     }
+        else
+         {
+     //If no session, redirect to login page
+     redirect('login', 'refresh');
+          }
+}
 
     function agregarJugadores($primary_key){
+        if($this->session->userdata('logged_in'))
+   {
         $crud = new grocery_CRUD();
         $crud->set_table('jugador'); //Change to your table name
         $crud->set_subject('Jugador');
@@ -195,8 +253,16 @@ class Administrador extends CI_Controller {
         $this->_example_output($output);
 
     }
+     else
+         {
+     //If no session, redirect to login page
+     redirect('login', 'refresh');
+          }
+}
 
     function noticias(){
+         if($this->session->userdata('logged_in'))
+   {
         $crud = new grocery_CRUD();
         //$crud->set_theme('datatables');
         $crud->set_table('noticias');
@@ -209,11 +275,16 @@ class Administrador extends CI_Controller {
         $output = $crud->render();
         $this->_example_output($output);
     }
+    else
+         {
+     //If no session, redirect to login page
+     redirect('login', 'refresh');
+          }
+}
 
-    function persona()
-
-    {
-        
+    function persona(){
+      if($this->session->userdata('logged_in'))
+   {  
     $crud = new grocery_CRUD();
  
     $crud->set_theme('datatables');
@@ -228,6 +299,12 @@ class Administrador extends CI_Controller {
     $this->_example_output($output);
 
     }
+    else
+         {
+     //If no session, redirect to login page
+     redirect('login', 'refresh');
+          }
+}
 
     function getRandomCode(){
     $an = "0123456789";
@@ -243,5 +320,71 @@ class Administrador extends CI_Controller {
             substr($an, rand(0, $su), 1).
             substr($an, rand(0, $su), 1);
     }
+
+    function auditorios(){
+        if($this->session->userdata('logged_in'))
+   {  
+        $crud = new grocery_CRUD();
+        $crud->set_table('auditorios');
+        $crud->display_as('nombre','Auditorio');
+        $crud->columns('nombre');
+        $crud->set_subject('Auditorio');
+        $crud->set_language("spanish");
+        $output = $crud->render();
+        $this->_example_output($output);
+    }
+    else
+         {
+     //If no session, redirect to login page
+     redirect('login', 'refresh');
+          }
+}
+
+    function nivelusuario(){
+if($this->session->userdata('logged_in'))
+   {
+        $crud = new grocery_CRUD();
+        $crud->set_table('nivelusuario');
+        $crud->columns('nivel_usuario');
+        $crud->set_subject('Nivel de Usuario');
+        $crud->set_language("spanish");
+        $output = $crud->render();
+        $this->_example_output($output);
+}
+   else
+   {
+     //If no session, redirect to login page
+     redirect('login', 'refresh');
+   }
+    }
+
+    function users(){
+        if($this->session->userdata('logged_in'))
+   {  
+        $crud = new grocery_CRUD();
+        $crud->set_table('users');
+        $crud->display_as('username','Usuario');
+        $crud->display_as('password','Contraseña');
+        
+        //$crud->columns('nombre');
+        //$crud->set_subject('Usuarios');
+        $crud->set_language("spanish");
+        $output = $crud->render();
+        $this->_example_output($output);
+
+}
+ else
+   {
+     //If no session, redirect to login page
+     redirect('login', 'refresh');
+   }
+}
+function logout()
+ {
+   $this->session->unset_userdata('logged_in');
+   session_destroy();
+   redirect('login', 'refresh');
+ }
+ 
 
 }
